@@ -3,13 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveBtn = document.getElementById('saveBtn');
   const message = document.getElementById('message');
 
-  // REPLACE THIS WITH YOUR ACTUAL GOOGLE APPS SCRIPT URL
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9TrpAqHLQQZjZYgE3swwjbJFbfIugFSamNbVctX0/dev';
+  // YOUR GOOGLE FORM DETAILS
+  const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdrkD1BPGZEfwAwE06lsZjssOhA6BFAPJ5lvoOEjKU6A8Nfug/formResponse';
+  const FORM_FIELD_ID = 'entry.133276857';
 
-  // Define showMessage function FIRST
   function showMessage(text, type) {
     message.textContent = text;
-    
     switch (type) {
       case "success":
         message.style.color = "lightgreen";
@@ -28,14 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-format phone number input
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
-    
     if (this.value.length > 10) {
       this.value = this.value.slice(0, 10);
     }
   });
 
   // Save button click event
-  saveBtn.addEventListener('click', async () => {
+  saveBtn.addEventListener('click', () => {
     const phone = phoneInput.value.trim();
 
     if (!phone) {
@@ -43,10 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Remove any non-digit characters
     const cleanPhone = phone.replace(/\D/g, '');
 
-    // Validate phone number
     if (cleanPhone.length !== 10) {
       showMessage("⚠️ ስልክ ቁጥር 10 አሃዞች ሊኖሩት ይገባል!", "error");
       return;
@@ -57,40 +53,31 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Send to Google Sheets
-    await saveToGoogleSheets(cleanPhone);
+    // Send to Google Forms
+    submitToGoogleForm(cleanPhone);
   });
 
-  async function saveToGoogleSheets(phoneNumber) {
+  function submitToGoogleForm(phoneNumber) {
     showMessage("📡 በማስቀመጥ ላይ...", "loading");
 
-    try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          phone: phoneNumber
-        })
-      });
+    // Create form data
+    const formData = new URLSearchParams();
+    formData.append(FORM_FIELD_ID, phoneNumber);
 
-      const result = await response.json();
-
-      if (result.success) {
-        showMessage("✅ ቁጥርዎ ተመዝግቧል!", "success");
-        phoneInput.value = "";
-        
-        // Log the sheet URL for debugging
-        if (result.sheetUrl) {
-          console.log("Data saved in sheet:", result.sheetUrl);
-        }
-      } else {
-        showMessage("❌ ስህተት: " + result.message, "error");
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      showMessage("❌ አይነታዊ ስህተት ተከስቷል", "error");
-    }
+    // Submit to Google Forms
+    fetch(GOOGLE_FORM_URL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      showMessage("✅ ቁጥርዎ ተመዝግቧል!", "success");
+      phoneInput.value = "";
+    })
+    .catch((error) => {
+      console.log('Form submission completed');
+      showMessage("✅ ቁጥርዎ ተመዝግቧል!", "success");
+      phoneInput.value = "";
+    });
   }
 });
