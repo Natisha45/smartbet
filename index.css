@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at center, #0B0B45 0%, #000 90%);
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+h1 span {
+  color: #f1d550;
+}
+
+p {
+  color: #ccc;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+input[type="tel"] {
+  width: 260px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+button {
+  width: 260px;
+  height: 45px;
+  background-color: rgba(255, 68, 0, 0.685);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #91e63e;
+  box-shadow: 0 0 10px #a6ff4d;
+}
+
+#message {
+  margin-top: 15px;
+  min-height: 20px;
+  font-size: 14px;
+}
