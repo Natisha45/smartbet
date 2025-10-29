@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const countdownContainer = document.createElement('div');
   countdownContainer.className = 'countdown-container';
   countdownContainer.innerHTML = `
-    <div class="countdown-header">🎯 የሽልማት ጊዜው!</div>  <!-- Updated text -->
+    <div class="countdown-header">🎯  የሽልማት ጊዜው!</div>
     <div class="countdown-timer">
       <span class="countdown-item">
         <span id="countdown-days">00</span>
@@ -46,30 +46,41 @@ document.addEventListener('DOMContentLoaded', () => {
         <span id="countdown-minutes">00</span>
         <span class="countdown-label">ደቂቃዎች</span>
       </span>
+      <span class="countdown-separator">:</span>
+      <span class="countdown-item">
+        <span id="countdown-seconds">00</span>
+        <span class="countdown-label">ሴኮንዶች</span>
+      </span>
     </div>
   `;
   document.body.insertBefore(countdownContainer, document.body.firstChild);
   
   updateCountdown();
-  setInterval(updateCountdown, 60000); // Update every minute
+  setInterval(updateCountdown, 1000); // Changed to update every second (1000ms)
 }
-
  function updateCountdown() {
   const now = new Date();
   // Set target date to November 1, 2025 at 23:59:59
   const targetDate = new Date(2025, 10, 1, 23, 59, 59); // Note: Month is 10 for November (0-indexed)
   const timeLeft = targetDate - now;
   
-  // Calculate days, hours, minutes
+  // Calculate days, hours, minutes, seconds
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
   const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
   
   // Update the display
   document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
   document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
   document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+  document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
   
+  // Optional: Update the countdown header text
+  const countdownHeader = document.querySelector('.countdown-header');
+  if (countdownHeader) {
+    countdownHeader.textContent = `🎯 ዕጣው በሳምንት ሚያዚያ 22፣ 2018 ይዘጋል!`;
+  }
 }
 
   phoneInput.addEventListener('input', function() {
