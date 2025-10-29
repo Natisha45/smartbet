@@ -103,9 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
     showMessage("🔍 ቁጥር እየተፈተሸ...", "loading");
 
     try {
-      // First check if number exists
-      const checkResponse = await fetch(GOOGLE_SCRIPT_URL + `?action=check&phone=${encodeURIComponent(phoneNumber)}`);
-      const checkResult = await checkResponse.json();
+      // Use JSONP approach for CORS bypass
+      const checkResult = await jsonpRequest(GOOGLE_SCRIPT_URL, {
+        action: 'check',
+        phone: phoneNumber
+      });
 
       if (checkResult.exists) {
         showMessage("⚠️ ይህ ቁጥር አስቀድሞ ተመዝግቧል!", "error");
@@ -136,8 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
     showMessage("📡 በማስቀመጥ ላይ...", "loading");
 
     try {
-      const submitResponse = await fetch(GOOGLE_SCRIPT_URL + `?action=submit&phone=${encodeURIComponent(phoneNumber)}`);
-      const submitResult = await submitResponse.json();
+      // Use JSONP for submission too
+      const submitResult = await jsonpRequest(GOOGLE_SCRIPT_URL, {
+        action: 'submit',
+        phone: phoneNumber
+      });
 
       if (submitResult.success) {
         showMessage("✅ ተመዝግቧል!", "success");
@@ -153,6 +158,33 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error submitting number:', error);
       showMessage("❌ አይነታዊ ስህተት ተከስቷል", "error");
     }
+  }
+
+  // JSONP function to bypass CORS
+  function jsonpRequest(url, params) {
+    return new Promise((resolve, reject) => {
+      const callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+      const script = document.createElement('script');
+      
+      params.callback = callbackName;
+      
+      const urlParams = new URLSearchParams(params).toString();
+      script.src = url + '?' + urlParams;
+      
+      window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        resolve(data);
+      };
+      
+      script.onerror = function() {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        reject(new Error('JSONP request failed'));
+      };
+      
+      document.body.appendChild(script);
+    });
   }
 
   function showCongratulationsPopup() {
