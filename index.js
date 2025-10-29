@@ -76,13 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
   document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
   
-  // Optional: Update the countdown header text
-  const countdownHeader = document.querySelector('.countdown-header');
-  if (countdownHeader) {
-    countdownHeader.textContent = `🎯 ዕጣው በሳምንት ሚያዚያ 22፣ 2018 ይዘጋል!`;
-  }
-}
-
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
     if (this.value.length > 10) {
