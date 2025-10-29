@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
   document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
   
+  
+}
+
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
     if (this.value.length > 10) {
