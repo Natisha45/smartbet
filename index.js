@@ -27,46 +27,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function createCountdownTimer() {
-    const countdownContainer = document.createElement('div');
-    countdownContainer.className = 'countdown-container';
-    countdownContainer.innerHTML = `
-      <div class="countdown-header">🎯 የወሩ እድል ይቆማል!</div>
-      <div class="countdown-timer">
-        <span class="countdown-item">
-          <span id="countdown-days">00</span>
-          <span class="countdown-label">ቀናት</span>
-        </span>
-        <span class="countdown-separator">:</span>
-        <span class="countdown-item">
-          <span id="countdown-hours">00</span>
-          <span class="countdown-label">ሰዓታት</span>
-        </span>
-        <span class="countdown-separator">:</span>
-        <span class="countdown-item">
-          <span id="countdown-minutes">00</span>
-          <span class="countdown-label">ደቂቃዎች</span>
-        </span>
-      </div>
-    `;
-    document.body.insertBefore(countdownContainer, document.body.firstChild);
-    
-    updateCountdown();
-    setInterval(updateCountdown, 60000);
-  }
+  const countdownContainer = document.createElement('div');
+  countdownContainer.className = 'countdown-container';
+  countdownContainer.innerHTML = `
+    <div class="countdown-header">🎯 የሽልማት ጊዜው!</div>  <!-- Updated text -->
+    <div class="countdown-timer">
+      <span class="countdown-item">
+        <span id="countdown-days">00</span>
+        <span class="countdown-label">ቀናት</span>
+      </span>
+      <span class="countdown-separator">:</span>
+      <span class="countdown-item">
+        <span id="countdown-hours">00</span>
+        <span class="countdown-label">ሰዓታት</span>
+      </span>
+      <span class="countdown-separator">:</span>
+      <span class="countdown-item">
+        <span id="countdown-minutes">00</span>
+        <span class="countdown-label">ደቂቃዎች</span>
+      </span>
+    </div>
+  `;
+  document.body.insertBefore(countdownContainer, document.body.firstChild);
+  
+  updateCountdown();
+  setInterval(updateCountdown, 60000); // Update every minute
+}
 
-  function updateCountdown() {
-    const now = new Date();
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
-    const timeLeft = endOfMonth - now;
-    
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    
-    document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-  }
+ function updateCountdown() {
+  const now = new Date();
+  // Set target date to November 1, 2025 at 23:59:59
+  const targetDate = new Date(2025, 10, 1, 23, 59, 59); // Note: Month is 10 for November (0-indexed)
+  const timeLeft = targetDate - now;
+  
+  // Calculate days, hours, minutes
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  
+  // Update the display
+  document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+  document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+  document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+  
+}
 
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
@@ -192,12 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
     popup.className = 'congratulations-popup';
     popup.innerHTML = `
       <div class="popup-content">
-        <div class="popup-header">🎉 CONGRATULATIONS! 🎉</div>
+        <div class="popup-header">🎉 እንኳን ደስ አልዎት! 🎉</div>
         <div class="popup-icon">🏆</div>
         <div class="popup-message">
-          <p><strong>You are one of the few chosen ones!</strong></p>
-          <p>Your number has been selected for our special prize draw.</p>
-          <p>Good luck! We'll contact you if you win!</p>
+          <p><strong>አሁን ለማሸነፍ አንድ እርምጃ ቀርበዋል!</strong></p>
+          <p>መልካም ዕድል! ለማሸነፍ ሁሌም በስማርት!</p>
         </div>
         <button class="popup-close" onclick="this.parentElement.parentElement.remove()">Close</button>
       </div>
