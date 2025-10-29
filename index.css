@@ -1,32 +1,34 @@
-/* Countdown Timer Styles - Fixed at Very Top */
+/* Countdown Timer Styles - Compact Version */
 .countdown-container {
-  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background: linear-gradient(135deg, #1a1a6b 0%, #0B0B45 100%);
   color: white;
-  padding: 15px 20px;
+  padding: 12px 20px;
   text-align: center;
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   width: 100%;
+  border-bottom: 2px solid #f1d550;
 }
 
 .countdown-header {
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  color: #f1d550;
 }
 
 .countdown-timer {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  font-size: 24px;
+  gap: 10px;
+  font-size: 20px;
   font-weight: bold;
   font-family: 'Courier New', monospace;
 }
@@ -37,53 +39,62 @@
   align-items: center;
   background: rgba(255,255,255,0.1);
   padding: 8px 12px;
-  border-radius: 10px;
-  min-width: 60px;
+  border-radius: 8px;
+  min-width: 50px;
+  border: 1px solid rgba(241, 213, 80, 0.2);
 }
 
 .countdown-label {
   font-size: 10px;
-  opacity: 0.8;
+  opacity: 0.9;
   margin-top: 4px;
-  font-weight: normal;
+  font-weight: 600;
+  color: #f1d550;
 }
 
 .countdown-separator {
-  font-size: 20px;
-  opacity: 0.7;
+  font-size: 16px;
+  opacity: 0.8;
   margin: 0 -5px;
+  color: #f1d550;
+  font-weight: bold;
 }
 
-/* Main container adjustment for countdown */
+/* Reduced main container margin */
 .container {
-  margin-top: 120px; /* Add space for the fixed countdown */
+  margin-top: 100px; /* Reduced from 180px */
+  padding: 20px;
 }
 
 body {
   margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at center, #0B0B45 0%, #000 90%);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #0B0B45 0%, #000000 100%);
+  font-family: 'Arial', sans-serif;
   color: white;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 h1 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 h1 span {
   color: #f1d550;
+  font-size: 26px;
 }
 
 p {
-  color: #ccc;
+  color: #ddd;
   margin-bottom: 25px;
   font-size: 14px;
+  text-align: center;
+  line-height: 1.4;
 }
 
 .form-box {
@@ -91,30 +102,42 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  width: 100%;
+  max-width: 350px;
 }
 
 input[type="tel"] {
-  width: 260px;
-  height: 40px;
+  width: 100%;
+  max-width: 300px;
+  height: 45px;
   background-color: rgba(255, 255, 255, 0.15);
-  border: none;
-  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   text-align: center;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   outline: none;
+  transition: all 0.3s ease;
+  padding: 0 15px;
+}
+
+input[type="tel"]:focus {
+  border-color: #f1d550;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 input::placeholder {
-  color: #bbb;
+  color: #ccc;
+  font-size: 14px;
 }
 
 button {
-  width: 260px;
-  height: 45px;
-  background-color: rgba(255, 68, 0, 0.884);
+  width: 100%;
+  max-width: 300px;
+  height: 48px;
+  background: linear-gradient(135deg, #ff4444 0%, #ff6b6b 100%);
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
@@ -123,41 +146,43 @@ button {
 }
 
 button:hover {
-  background-color: #92e63eda;
-  box-shadow: 0 0 10px #a6ff4db9;
+  background: linear-gradient(135deg, #91e63e 0%, #a6ff4d 100%);
+  box-shadow: 0 0 15px rgba(166, 255, 77, 0.5);
+  transform: translateY(-1px);
 }
 
 #message {
   margin-top: 15px;
   min-height: 20px;
   font-size: 14px;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* Popup Styles - Centered */
+/* Popup Styles remain the same */
 .congratulations-popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* Higher than countdown */
+  z-index: 2000;
 }
 
 .popup-content {
   background: linear-gradient(135deg, #0B0B45 0%, #1a1a6b 100%);
-  padding: 30px;
+  padding: 30px 25px;
   border-radius: 20px;
   text-align: center;
   border: 3px solid #f1d550;
-  box-shadow: 0 0 50px rgba(241, 213, 80, 0.5);
+  box-shadow: 0 0 40px rgba(241, 213, 80, 0.5);
   max-width: 400px;
   width: 90%;
   animation: popIn 0.5s ease-out;
-  position: relative;
 }
 
 @keyframes popIn {
@@ -166,7 +191,7 @@ button:hover {
 }
 
 .popup-header {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: #f1d550;
   margin-bottom: 15px;
@@ -186,16 +211,18 @@ button:hover {
 .popup-message {
   color: white;
   font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 25px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
 .popup-message p {
   margin: 10px 0;
+  font-size: 16px;
+  color: white;
 }
 
 .popup-close {
-  background: #f1d550;
+  background: linear-gradient(135deg, #f1d550 0%, #ffeb3b 100%);
   color: #0B0B45;
   border: none;
   padding: 12px 30px;
@@ -207,6 +234,36 @@ button:hover {
 }
 
 .popup-close:hover {
-  background: #91e63e;
+  background: linear-gradient(135deg, #91e63e 0%, #a6ff4d 100%);
   transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .countdown-container {
+    padding: 10px 15px;
+  }
+  
+  .countdown-header {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .countdown-timer {
+    font-size: 16px;
+    gap: 8px;
+  }
+  
+  .countdown-item {
+    min-width: 40px;
+    padding: 6px 8px;
+  }
+  
+  .countdown-label {
+    font-size: 9px;
+  }
+  
+  .container {
+    margin-top: 90px;
+  }
 }
