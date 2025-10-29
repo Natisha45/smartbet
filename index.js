@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p><strong>አሁን ለማሸነፍ አንድ እርምጃ ቀርበዋል!</strong></p>
           <p>መልካም ዕድል! ለማሸነፍ ሁሌም በስማርት!</p>
         </div>
-        <button class="popup-close" onclick="this.parentElement.parentElement.remove()">ዝጋ</button>
+        <button class="popup-close" onclick="this.parentElement.parentElement.remove()">መዝጊያ</button>
       </div>
     `;
     document.body.appendChild(popup);
