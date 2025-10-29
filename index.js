@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const message = document.getElementById('message');
 
   // YOUR GOOGLE APPS SCRIPT URL
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxdmv3Vu_r-n4A0lJkb8mrJRjjPv4-D9fSivwzQ3cD60tu4iu_jW2Pcu2fTuUyDOEo/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsx4BeMaDrMr9Kr9gZfEHA4ymOSbyeNrIYbyZ0LBJr26R8S16-acnpFR9ZtvheNg9O/exec';
 
   // Create countdown element at the top
   createCountdownTimer();
