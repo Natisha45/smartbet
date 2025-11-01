@@ -149,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="popup-header">🎉 እንኳን ደስ አልዎት! 🎉</div>
         <div class="popup-icon">🏆</div>
         <div class="popup-message">
-          <p><strong>አሁን ለማሸነፍ አንድ እርምጃ ቀርበዋል!</strong></p>
-          <p>መልካም ዕድል! ለማሸነፍ ሁሌም በስማርት!</p>
+          <p><strong>ለሽልማት እጩ ሆነዋል</strong></p>
+          <p>መልካም ዕድል! በብልሃት ተጫውተው ያሸንፉ (Be Smart To Win)!</p>
         </div>
         <button class="popup-close" onclick="this.parentElement.parentElement.remove()">መዝጊያ</button>
       </div>
