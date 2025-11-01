@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdrkD1BPGZEfwAwE06lsZjssOhA6BFAPJ5lvoOEjKU6A8Nfug/formResponse';
   const FORM_FIELD_ID = 'entry.133276857';
 
+  // TELEGRAM BOT CONFIGURATION - USE YOUR ACTUAL TOKEN
+  const TELEGRAM_BOT_TOKEN = '7955035287:AAHKT40Fw99_Vw-b0FXqcorj-Utqds5ePZY'; // ← Replace with your actual token
+  const TELEGRAM_CHAT_ID = '5047200958'; // ← Your Chat ID that worked
+
   // Create countdown element at the top
   createCountdownTimer();
 
@@ -76,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
   }
 
-  // Auto-format phone number input
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
     if (this.value.length > 10) {
@@ -84,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Save button click event
   saveBtn.addEventListener('click', () => {
     const phone = phoneInput.value.trim();
 
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       createConfetti();
       setTimeout(() => {
         phoneInput.value = "";
-        showCongratulationsPopup();
+        showCongratulationsPopup(phoneNumber);
       }, 1000);
     })
     .catch((error) => {
@@ -136,12 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
       createConfetti();
       setTimeout(() => {
         phoneInput.value = "";
-        showCongratulationsPopup();
+        showCongratulationsPopup(phoneNumber);
       }, 1000);
     });
   }
 
-  function showCongratulationsPopup() {
+  function showCongratulationsPopup(phoneNumber) {
     const popup = document.createElement('div');
     popup.className = 'congratulations-popup';
     popup.innerHTML = `
@@ -149,13 +151,49 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="popup-header">🎉 እንኳን ደስ አልዎት! 🎉</div>
         <div class="popup-icon">🏆</div>
         <div class="popup-message">
-          <p><strong>ለሽልማት እጩ ሆነዋል</strong></p>
+            <p><strong>ለሽልማት እጩ ሆነዋል</strong></p>
           <p>መልካም ዕድል! በብልሃት ተጫውተው ያሸንፉ (Be Smart To Win)!</p>
         </div>
-        <button class="popup-close" onclick="this.parentElement.parentElement.remove()">መዝጊያ</button>
+        <button class="popup-close" onclick="closePopupAndSendTelegram('${phoneNumber}')">ዝጋ</button>
       </div>
     `;
     document.body.appendChild(popup);
+  }
+
+  // Function to close popup and send Telegram message
+  window.closePopupAndSendTelegram = function(phoneNumber) {
+    // Remove popup
+    const popup = document.querySelector('.congratulations-popup');
+    if (popup) {
+      popup.remove();
+    }
+    
+    // Send Telegram message (silent - no user feedback needed)
+    sendTelegramMessage(phoneNumber);
+  };
+
+  async function sendTelegramMessage(phoneNumber) {
+    const messageText = `🎉 *አዲስ ሰው ተመዝግቧል!*\n\n` +
+                       `📱 ቁጥር: *${phoneNumber}*\n` +
+                       `⏰ ሰዓት: ${new Date().toLocaleString('en-US', { timeZone: 'Africa/Addis_Ababa' })}\n` +
+                       `✅ ከGoogle Forms ጋር በተሳካ ሁኔታ ተመዝግቧል!`;
+
+    try {
+      await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: messageText,
+          parse_mode: 'Markdown'
+        })
+      });
+      console.log('Telegram notification sent successfully');
+    } catch (error) {
+      console.log('Telegram notification failed (silent fail)');
+    }
   }
 
   function createConfetti() {
