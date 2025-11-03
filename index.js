@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateCountdown() {
     const now = new Date();
-    const targetDate = new Date(2025, 10, 5, 23, 59, 59);
+    const targetDate = new Date(2025, 10, 11, 23, 59, 59);
     const timeLeft = targetDate - now;
     
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
