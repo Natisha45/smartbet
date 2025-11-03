@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const FORM_FIELD_ID = 'entry.133276857';
 
   // TELEGRAM BOT CONFIGURATION - USE YOUR ACTUAL TOKEN
-  const TELEGRAM_BOT_TOKEN = '7955035287:AAHKT40Fw99_Vw-b0FXqcorj-Utqds5ePZY'; // ← Replace with your actual token
-  const TELEGRAM_CHAT_ID = '5047200958'; // ← Your Chat ID that worked
+  const TELEGRAM_BOT_TOKEN = '8539779753:AAHkxeHwjFa0fCo25S1zjakWKNA7KgnK-vc'; // ← Replace with your actual token
+  const TELEGRAM_CHAT_ID = '5868476026'; // ← Your Chat ID that worked
 
   // Create countdown element at the top
   createCountdownTimer();
