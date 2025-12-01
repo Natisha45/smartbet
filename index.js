@@ -63,38 +63,49 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
   }
-
-  function getNextMonday830AMEthiopian() {
-    const now = new Date();
+//loop from monday to monday
+  // function getNextMonday830AMEthiopian() {
+  //   const now = new Date();
     
-    // Convert current time to Ethiopian time (UTC+3)
-    const ethiopianOffset = 3 * 60 * 60 * 1000; // +3 hours in milliseconds
-    const nowEthiopian = new Date(now.getTime() + ethiopianOffset);
+  //   // Convert current time to Ethiopian time (UTC+3)
+  //   const ethiopianOffset = 3 * 60 * 60 * 1000; // +3 hours in milliseconds
+  //   const nowEthiopian = new Date(now.getTime() + ethiopianOffset);
     
-    // Calculate days until next Monday in Ethiopian time
-    let daysUntilMonday = (1 - nowEthiopian.getDay() + 7) % 7;
+  //   // Calculate days until next Monday in Ethiopian time
+  //   let daysUntilMonday = (1 - nowEthiopian.getDay() + 7) % 7;
     
-    // If it's already Monday but past 8:30 AM Ethiopian time, go to next Monday
-    if (daysUntilMonday === 0 && 
-        (nowEthiopian.getHours() > 8 || 
-         (nowEthiopian.getHours() === 8 && nowEthiopian.getMinutes() >= 30))) {
-        daysUntilMonday = 7;
-    }
+  //   // If it's already Monday but past 8:30 AM Ethiopian time, go to next Monday
+  //   if (daysUntilMonday === 0 && 
+  //       (nowEthiopian.getHours() > 8 || 
+  //        (nowEthiopian.getHours() === 8 && nowEthiopian.getMinutes() >= 30))) {
+  //       daysUntilMonday = 7;
+  //   }
     
-    // Create target date for next Monday 8:30 AM Ethiopian time
-    const targetEthiopian = new Date(nowEthiopian);
-    targetEthiopian.setDate(nowEthiopian.getDate() + daysUntilMonday);
-    targetEthiopian.setHours(8, 30, 0, 0); // 8:30 AM Ethiopian time
+  //   // Create target date for next Monday 8:30 AM Ethiopian time
+  //   const targetEthiopian = new Date(nowEthiopian);
+  //   targetEthiopian.setDate(nowEthiopian.getDate() + daysUntilMonday);
+  //   targetEthiopian.setHours(8, 30, 0, 0); // 8:30 AM Ethiopian time
     
-    // Convert back to local time for countdown calculation
-    const targetLocal = new Date(targetEthiopian.getTime() - ethiopianOffset);
+  //   // Convert back to local time for countdown calculation
+  //   const targetLocal = new Date(targetEthiopian.getTime() - ethiopianOffset);
     
-    return targetLocal;
-  }
-
+  //   return targetLocal;
+  // }
+//specfic date
+  function getFixedEndDate() {
+  // Example: December 25, 2024 at 8:30 AM Ethiopian Time
+  // Format: new Date(year, month, day, hour, minute, second)
+  // Month is 0-indexed: 0=Jan, 11=Dec
+  const fixedDate = new Date(2025, 12, 6, 8, 30, 0); // Dec 25, 2024, 8:30 AM
+  
+  // Adjust for Ethiopian time (UTC+3)
+  const ethiopianOffset = 3 * 60 * 60 * 1000;
+  return new Date(fixedDate.getTime() - ethiopianOffset);
+}
   function updateCountdown() {
     const now = new Date();
-    const targetDate = getNextMonday830AMEthiopian();
+    // const targetDate = getNextMonday830AMEthiopian(); //for the moday to monday countdown
+    const tagetDate = getFixedEndDate;
     const timeLeft = targetDate - now;
     
     // If countdown is over, show zeros
