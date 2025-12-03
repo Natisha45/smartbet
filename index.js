@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
  function getFixedEndDate() {
   // Fixed date: December 6, 2025 at 8:30 AM Ethiopian Time
   // Month is 0-indexed: 0=Jan, 11=Dec, so 11=December
-  const fixedDate = new Date(2025, 11, 7, 8, 30, 0); // Dec 6, 2025, 8:30 AM
+  const fixedDate = new Date(2025, 11, 6, 8, 30, 0); // Dec 6, 2025, 8:30 AM
   
   // Adjust for Ethiopian time (UTC+3)
   const ethiopianOffset = 3 * 60 * 60 * 1000;
