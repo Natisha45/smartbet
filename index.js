@@ -92,47 +92,46 @@ document.addEventListener('DOMContentLoaded', () => {
   //   return targetLocal;
   // }
 //specfic date
-  function getFixedEndDate() {
-  // Example: December 25, 2024 at 8:30 AM Ethiopian Time
-  // Format: new Date(year, month, day, hour, minute, second)
-  // Month is 0-indexed: 0=Jan, 11=Dec
-  const fixedDate = new Date(2025, 12, 6, 8, 30, 0); // Dec 25, 2024, 8:30 AM
+ function getFixedEndDate() {
+  // Fixed date: December 6, 2025 at 8:30 AM Ethiopian Time
+  // Month is 0-indexed: 0=Jan, 11=Dec, so 11=December
+  const fixedDate = new Date(2025, 11, 6, 8, 30, 0); // Dec 6, 2025, 8:30 AM
   
   // Adjust for Ethiopian time (UTC+3)
   const ethiopianOffset = 3 * 60 * 60 * 1000;
   return new Date(fixedDate.getTime() - ethiopianOffset);
 }
-  function updateCountdown() {
-    const now = new Date();
-    // const targetDate = getNextMonday830AMEthiopian(); //for the moday to monday countdown
-    const tagetDate = getFixedEndDate();
-    const timeLeft = targetDate - now;
+
+function updateCountdown() {
+  const now = new Date();
+  const targetDate = getFixedEndDate(); // Fixed: added parentheses to call the function
+  const timeLeft = targetDate - now;
+  
+  // If countdown is over, show zeros
+  if (timeLeft <= 0) {
+    document.getElementById('countdown-days').textContent = '00';
+    document.getElementById('countdown-hours').textContent = '00';
+    document.getElementById('countdown-minutes').textContent = '00';
+    document.getElementById('countdown-seconds').textContent = '00';
     
-    // If countdown is over, show zeros
-    if (timeLeft <= 0) {
-      document.getElementById('countdown-days').textContent = '00';
-      document.getElementById('countdown-hours').textContent = '00';
-      document.getElementById('countdown-minutes').textContent = '00';
-      document.getElementById('countdown-seconds').textContent = '00';
-      
-      // Optional: Update header when countdown ends
-      const countdownHeader = document.querySelector('.countdown-header');
-      if (countdownHeader) {
-        countdownHeader.textContent = '🎯 የሽልማት ጊዜው አልቋል!';
-      }
-      return;
+    // Optional: Update header when countdown ends
+    const countdownHeader = document.querySelector('.countdown-header');
+    if (countdownHeader) {
+      countdownHeader.textContent = '🎯 የሽልማት ጊዜው አልቋል!';
     }
-    
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-    
-    document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+    return;
   }
+  
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  
+  document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+  document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+  document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+  document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+}
 
   phoneInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '');
