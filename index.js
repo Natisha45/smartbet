@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateCountdown() {
     const now = new Date();
     // const targetDate = getNextMonday830AMEthiopian(); //for the moday to monday countdown
-    const tagetDate = getFixedEndDate;
+    const tagetDate = getFixedEndDate();
     const timeLeft = targetDate - now;
     
     // If countdown is over, show zeros
